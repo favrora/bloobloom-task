@@ -1,0 +1,108 @@
+/****************************
+******* Side menu CSS *******
+****************************/
+
+.bloobloom-side-menu {
+  display: flex;
+  position: fixed;
+  background: #fff;
+  height: calc(100vh - 40px);
+  top: 40px;
+  left: -480px;
+  transition: all .4s ease;
+}
+
+.menu-list {
+  width: 240px;
+  z-index: 10;
+  background: #fff;
+}
+
+.bloobloom-side-menu.open {
+  border: 1px solid #000;
+  border-top: none;
+  border-bottom: none;
+  left: 0;
+}
+
+.menu-tab {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: space-between;
+  height: 60px;
+  border-bottom: 1px solid #000;
+  cursor: pointer;
+  padding: 0 18px;
+  font-size: 15px;
+  color: #000;
+  font-weight: bold;
+  text-transform: uppercase;
+  text-decoration: none;
+}
+
+.menu-tab:hover {
+  color: #fff;
+  background: #000;
+  text-decoration: none;
+}
+
+.menu-tab:hover svg path {
+  stroke: #fff;
+}
+
+@media screen and (min-width: 1366px) {
+  .bloobloom-side-menu {
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    width: 481px;
+    background: #fff;
+    height: calc(100vh - 50px);
+    top: 50px;
+    left: -481px;
+    transition: all .4s ease;
+  }
+}
+
+.sub-menu {
+  position: absolute;
+  bottom: 0;
+  top: 0;
+  left: 0;
+  width: 240px;
+  border-right: 1px solid #000;
+  border-left: 1px solid #000;
+  background: #fff;
+  transition: all .4s ease;
+  z-index: -1;
+}
+
+.sub-menu.active {
+  left: 240px;
+  z-index: 1;
+}
+
+.menu-tab.go-back {
+  display: none;
+}
+
+/* Submenu style for mobile */
+@media screen and (max-width: 600px) {
+  .sub-menu {
+    left: -240px;
+    z-index: 10;
+  }
+
+  .sub-menu.active {
+    left: 0;
+    border: 0;
+    z-index: 10;
+  }
+
+  .menu-tab.go-back {
+    display: flex;
+  }
+}
+
+
