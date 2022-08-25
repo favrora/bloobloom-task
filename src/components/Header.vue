@@ -36,6 +36,7 @@ export default {
   },
   methods: {
     showMenu: function() {
+      document.querySelector(".bloobloom-header-button").classList.add("active");
       document.querySelector(".bloobloom-side-menu").classList.add("open");
       this.hover = "yes";
     },
@@ -46,6 +47,7 @@ export default {
       setTimeout(() => {
         if (sideMenu.dataset.hover === "no") {
           sideMenu.classList.remove("open");
+          document.querySelector(".bloobloom-header-button").classList.remove("active");
         }
       }, 0);
 

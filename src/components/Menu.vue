@@ -2,12 +2,12 @@
   <div class="bloobloom-side-menu" @mouseenter="showMenu" @mouseleave="hideMenu" :data-hover="hover">
 
     <div class="menu-list">
-      <div class="menu-tab" @click="isSunglassesActive = false;isSpectaglesActive = !isSpectaglesActive">
+      <div class="menu-tab" @mouseenter="isSunglassesActive = false;isSpectaglesActive = !isSpectaglesActive">
         <span>Spectagles</span>
         <svg width="11" height="16" viewBox="0 0 11 16" fill="none" class="sidemenu-tab-icon"><path d="M1 1L9 8.2L1 15.4" stroke="black" stroke-opacity="0.85" stroke-width="1.5"></path></svg>
       </div>
 
-      <div class="menu-tab" @click="isSpectaglesActive = false;isSunglassesActive = !isSunglassesActive">
+      <div class="menu-tab" @mouseenter="isSpectaglesActive = false;isSunglassesActive = !isSunglassesActive">
         <span>Sunglasses</span>
         <svg width="11" height="16" viewBox="0 0 11 16" fill="none" class="sidemenu-tab-icon"><path d="M1 1L9 8.2L1 15.4" stroke="black" stroke-opacity="0.85" stroke-width="1.5"></path></svg>
       </div>
@@ -43,11 +43,11 @@
       </div>
 
       <a href="/" class="menu-tab">
-        <span>Some sunglasses</span>
+        <span>Women</span>
       </a>
 
       <a href="/" class="menu-tab">
-        <span>Sunglasses 2</span>
+        <span>Men</span>
       </a>
     </div>
 
@@ -76,6 +76,7 @@ export default {
       setTimeout(() => {
         if (btnMenu.dataset.hover === "no") {
           document.querySelector(".bloobloom-side-menu").classList.remove("open");
+          btnMenu.classList.remove("active");
         }
       }, 0);
     },

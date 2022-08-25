@@ -52,7 +52,12 @@
 }
 
 .bloobloom-header-button span {
-  border-bottom: 3px solid #000;
+  border-bottom: 3px solid transparent;
+  transition: 200ms;
+}
+
+.bloobloom-header-button.active span {
+  border-bottom-color: rgb(74, 74, 74);
 }
 
 .header-logo-item {
