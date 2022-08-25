@@ -9,7 +9,7 @@ const collectionURL = 'https://staging-api.bloobloom.com/user/v1/sales_channels/
 // https://bloobloom.com/collections/spectacles-women
 
 export default {
-  name: "View",
+  name: "Content",
   created: function() {
     this.getCollection();
   },

@@ -1,19 +1,17 @@
-/* import { createApp } from "vue";
-import App from "./App.vue";
-import router from './router'
+import Vue from 'vue'
+import VueRouter from 'vue-router'
+import routes from './router'
+import App from './App'
 
-createApp(App).use(router).mount("#app"); */
+Vue.use(VueRouter)
 
-
-import { createApp } from 'vue'
-import App from './App.vue'
-import router from './router'
-
-const app = createApp(App)
-app.use(router)
-
-// Replace -> app.mount('#app')
-router.isReady().then(() => {
-    app.mount('#app')
+const router = new VueRouter({
+  mode: 'history',
+  routes: routes
 })
 
+new Vue({
+  el: '#app',
+  router,
+  render: h => h(App)
+})

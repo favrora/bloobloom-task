@@ -2,7 +2,7 @@
 ********** Header CSS **********
 *******************************/
 
-#header {
+#headerMenu {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -70,7 +70,7 @@
 
 /* Hide for mobile */
 @media screen and (min-width: 1366px) {
-  #header {
+  #headerMenu {
     height: 50px;
   }
 

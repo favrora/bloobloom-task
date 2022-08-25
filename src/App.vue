@@ -1,17 +1,19 @@
 <template>
-  <Header />
-  <View />
+  <div>
+    <HeaderMenu />
+    <Content />
+  </div>
 </template>
 
 <script>
-import Header from "./components/Header";
-import View from "./components/View";
+import HeaderMenu from "./components/Header";
+import Content from "./components/Content";
 
 export default {
   name: "App",
   components: {
-    Header,
-    View
+    HeaderMenu,
+    Content
   },
 };
 </script>
