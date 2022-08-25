@@ -1,0 +1,27 @@
+/******************************
+******** Bloobloom CSS ********
+******************************/
+
+@import 'bootstrap/dist/css/bootstrap.css';
+
+@import 'variables';
+@import 'header';
+
+* {
+	margin: 0;
+	padding: 0;
+}
+
+body {
+	color: #444444;
+	background: #f8f8f8;
+	font: 16px sans-serif, Arial, Verdana;
+}
+
+img {
+	max-width: 100%;
+}
+
+#app {
+	position: relative;
+}
