@@ -27,11 +27,11 @@
         <span>Go Back</span>
       </div>
 
-      <a href="/" class="menu-tab">
+      <a href="/collections/spectacles-women" class="menu-tab">
         <span>Women</span>
       </a>
 
-      <a href="/" class="menu-tab">
+      <a href="/collections/spectacles-men" class="menu-tab">
         <span>Men</span>
       </a>
     </div>
@@ -42,11 +42,11 @@
         <span>Go Back</span>
       </div>
 
-      <a href="/" class="menu-tab">
+      <a href="/collections/sunglasses-women" class="menu-tab">
         <span>Women</span>
       </a>
 
-      <a href="/" class="menu-tab">
+      <a href="/collections/sunglasses-men" class="menu-tab">
         <span>Men</span>
       </a>
     </div>
