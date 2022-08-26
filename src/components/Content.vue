@@ -10,21 +10,92 @@
 
       <div class="filter-box col-12 col-sm-6 col-md-4">
         <div class="filters-menu">
-          <div>Colour</div>
-          <div>Shape</div>
+          <div @click="isColourFilters = !isColourFilters"
+              :class="{ active: isColourFilters }">
+              Colour
+          </div>
+          <div @click="isShapeFilters = !isShapeFilters"
+              :class="{ active: isShapeFilters }"
+            >
+            Shape
+          </div>
         </div>
       </div>
     </div>
 
+    <div class="filter-items row" :class="{ active: isColourFilters }">
+      <div class="col">
+        <span class="colour-hover">
+          <span class="colour-preview" style="background:#000"></span>
+        </span>
+        Black
+      </div>
+
+      <div class="col">
+        <span class="colour-hover">
+          <span class="colour-preview tortoise"></span>
+        </span>
+        Tortoise
+      </div>
+
+      <div class="col">
+        <span class="colour-hover">
+          <span class="colour-preview coloured"></span>
+        </span>
+        Coloured
+      </div>
+
+      <div class="col">
+        <span class="colour-hover">
+          <span class="colour-preview" style="background:#ebecf1"></span>
+        </span>
+        Crystal
+      </div>
+
+      <div class="col">
+        <span class="colour-hover">
+          <span class="colour-preview" style="background:#622932"></span>
+        </span>
+        Dark
+      </div>
+
+      <div class="col">
+        <span class=colour-hover>
+          <span class="colour-preview" style="background:#d68c36"></span>
+        </span>
+        Bright
+      </div>
+    </div>
+
+
+    <div class="filter-items shape row" :class="{ active: isShapeFilters }">
+      <div class="col">
+        Square
+      </div>
+
+      <div class="col">
+        Rectangle
+      </div>
+
+      <div class="col">
+        Round
+      </div>
+
+      <div class="col">
+        Cat-Eye
+      </div>
+
+    </div>
+
 
     <div class="row items">
-      <div class="item col-12 col-sm-6 col-md-4"">A</div>
+      <div class="item col-12 col-sm-6 col-md-4">A</div>
 
-      <div class="item col-12 col-sm-6 col-md-4"">A</div>
+      <div class="item col-12 col-sm-6 col-md-4">A</div>
 
-      <div class="item col-12 col-sm-6 col-md-4"">A</div>
+      <div class="item col-12 col-sm-6 col-md-4">A</div>
 
-      <div class="item col-12 col-sm-6 col-md-4"">A</div>
+      <div class="item col-12 col-sm-6 col-md-4">A</div>
     </div>
     
 
@@ -38,7 +109,9 @@ export default {
   name: "Content",
   data() {
     return {
-      mainTitle: "Spectacles Women"
+      mainTitle: "Spectacles Women",
+      isColourFilters: false,
+      isShapeFilters: false
     };
   },
   created: function() {
