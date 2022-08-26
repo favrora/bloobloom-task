@@ -84,7 +84,6 @@
       <div class="col" @click="addShapeFilter('cat-Eye')">
         Cat-Eye
       </div>
-
     </div>
 
     <!-- Items -->
@@ -155,7 +154,6 @@ export default {
       let collectionBox = document.getElementById("collectionBox");
       collectionBox.innerHTML = "";
 
-      console.log(dataURL);
       console.log(json);
 
       // Hide loader
@@ -176,12 +174,18 @@ export default {
     },
 
     addColourFilter: function(colour) {
-      this.$router.push({ query: { 'filters[glass_variant_frame_variant_colour_tag_configuration_names][]': colour }});
+      let queryArr = this.$route.query,
+        newParams = { ...queryArr, 'filters[glass_variant_frame_variant_colour_tag_configuration_names][]': colour };
+
+      this.$router.push({ query: newParams }).catch(err => {});
       this.getCollection();
     },
 
     addShapeFilter: function(shape) {
-      this.$router.push({ query: { 'filters[glass_variant_frame_variant_frame_tag_configuration_names][]': shape }});
+      let queryArr = this.$route.query,
+        newParams = { ...queryArr, 'filters[glass_variant_frame_variant_frame_tag_configuration_names][]': shape };
+
+      this.$router.push({ query: newParams }).catch(err => {});
       this.getCollection();
     }
 
