@@ -52,6 +52,7 @@ h1 {
 /* Filters */
 .filter-row {
 	border-bottom: 1px solid #000;
+	margin: 0;
 }
 
 .filter-row .filter-box {
@@ -156,5 +157,24 @@ h1 {
 
 .filter-items.shape .col:hover {
 	text-decoration: underline;
+}
+
+.collection-items {
+	display: flex;
+	flex-wrap: wrap;
+}
+
+.collection-items div.item {
+	background: #f6f6f4;
+	color: #2a2a2a;
+	text-align: center;
+	padding: 0;
+	border: 1px solid #000;
+}
+
+.collection-items div.item .title {
+	display: block;
+	margin-top: 10px;
+	text-transform: uppercase;
 }
 

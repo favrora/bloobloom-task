@@ -87,23 +87,18 @@
 
     </div>
 
+    <!-- <div class="item col-12 col-sm-6 col-md-4">A</div> -->
 
-    <div class="row items">
-      <div class="item col-12 col-sm-6 col-md-4">A</div>
-
-      <div class="item col-12 col-sm-6 col-md-4">A</div>
-
-      <div class="item col-12 col-sm-6 col-md-4">A</div>
-
-      <div class="item col-12 col-sm-6 col-md-4">A</div>
-    </div>
-    
+    <div id="collectionBox" class="collection-items"></div>
 
   </div>
 </template>
 
 <script>
-const collectionURL = 'https://staging-api.bloobloom.com/user/v1/sales_channels/website/collections';
+let collectionURL = 'https://staging-api.bloobloom.com/user/v1/sales_channels/website/collections',
+  dataURL = "https://staging-api.bloobloom.com/user/v1/sales_channels/website/collections/";
+
+  // https://api.bloobloom.com/user/v1/sales_channels/website/collections/spectacles-men/glasses?sort[type]=collection_relations_position&sort[order]=asc&filters[lens_variant_prescriptions][]=fashion&filters[lens_variant_types][]=classic&page[limit]=12&page[number]=1&filters[glass_variant_frame_variant_colour_tag_configuration_names][]=coloured&filters[glass_variant_frame_variant_frame_tag_configuration_names][]=round&filters[frame_variant_home_trial_available]=false
 
 export default {
   name: "Content",
@@ -134,10 +129,44 @@ export default {
       for (let i = 0; i < data.length; i++) {
         if (currentCollection === data[i].configuration_name) {
           this.mainTitle = data[i].name;
+          dataURL = `${dataURL}${data[i].configuration_name}/glasses${window.location.search}`;
+          this.getItem();
         }
-
       }
+    },
+
+    getItem: function() {
+      fetch(dataURL)
+        .then(response => {
+          response.json().then(json => {
+            this.showItem(json.glasses);
+          });
+        })
+    },
+
+    showItem: function(json) {
+      let collectionBox = document.getElementById("collectionBox");
+      collectionBox.innerHTML = "";
+
+      console.log(dataURL);
+      console.log(json);
+
+      for (let i = 0; i < json.length; i++) {
+        let itemName = json[i].name,
+          itemImage = json[i].glass_variants[0].media[0].url,
+
+          itemTemplate = `
+            <div class="item col-12 col-sm-6 col-md-4">
+              <span class="title">${itemName}</span>
+              <img src="${itemImage}" alt=">${itemName}">
+            </div>`;
+
+        collectionBox.innerHTML += itemTemplate;
+      }
+
+
     }
+
   }
 };
 </script>
