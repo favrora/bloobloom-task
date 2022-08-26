@@ -17,7 +17,7 @@
 
 body {
 	color: #444444;
-	background: #f8f8f8;
+	background: #fff; /* #f8f8f8; */
 	font: 16px sans-serif, Arial, Verdana;
 }
 
@@ -169,6 +169,8 @@ h1 {
 	color: #2a2a2a;
 	text-align: center;
 	padding: 0;
+	margin: -1px;
+	cursor: pointer;
 	border: 1px solid #000;
 }
 
@@ -178,3 +180,21 @@ h1 {
 	text-transform: uppercase;
 }
 
+.collection-items div.item img {
+	transition: 300ms;
+	transform: scale(1);
+}
+
+.collection-items div.item:hover img {
+	transform: scale(0.9);
+}
+
+
+/* loader */
+.loader {
+	background: url("../img/loader.gif");
+	width: 50px;
+	height: 50px;
+	margin: 20px auto 0;
+	background-size: contain;
+}
