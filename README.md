@@ -12,7 +12,7 @@ Test
 
 ## Preview
 
-https://favrora.com/bloobloom-task.mp4
+[<img src="https://favrora.com/preview.jpg" width="50%">](https://youtu.be/5ZxhQRPW_LQ "Preview Video")
 
 ## Development
 
