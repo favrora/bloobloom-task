@@ -73,6 +73,7 @@ export default {
       const btnMenu = document.querySelector(".bloobloom-header-button");
       this.hover = "no";
 
+      // Using setTimeout to delay code execution in the event loop
       setTimeout(() => {
         if (btnMenu.dataset.hover === "no") {
           document.querySelector(".bloobloom-side-menu").classList.remove("open");
@@ -80,9 +81,12 @@ export default {
         }
       }, 0);
     },
+
     submenuFocus: function() {
       this.submenuHover = true;
     },
+
+    // Hide all submenu and reset hover
     hideAllSubmenu: function() {
       if (this.submenuHover) {
         this.isSpectaglesActive = false;

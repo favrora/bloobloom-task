@@ -12,11 +12,10 @@
         <div class="filters-menu">
           <div @click="isColourFilters = !isColourFilters"
               :class="{ active: isColourFilters }">
-              Colour
+            Colour
           </div>
           <div @click="isShapeFilters = !isShapeFilters"
-              :class="{ active: isShapeFilters }"
-            >
+              :class="{ active: isShapeFilters }">
             Shape
           </div>
         </div>
@@ -67,7 +66,6 @@
       </div>
     </div>
 
-
     <div class="filter-items shape row" :class="{ active: isShapeFilters }">
       <div class="col" @click="addShapeFilter('square')" data-shape="square">
         Square
@@ -88,9 +86,9 @@
 
     <!-- Items -->
     <div id="collectionBox" class="collection-items"
-      v-infinite-scroll="loadMore"
-      infinite-scroll-disabled="infinityScrollDisabled"
-      infinite-scroll-distance="80">
+         v-infinite-scroll="loadMore"
+         infinite-scroll-disabled="infinityScrollDisabled"
+         infinite-scroll-distance="80">
     </div>
 
     <!-- Loader -->
@@ -98,7 +96,7 @@
       <div class="loader"></div>
     </div>
 
-    <!-- No results-->
+    <!-- No results -->
     <div class="no-results pt-4 text-center" :class="{ 'd-none': noResults }">
       No results, please change your filters
     </div>
@@ -110,8 +108,6 @@
 let collectionURL = 'https://staging-api.bloobloom.com/user/v1/sales_channels/website/collections',
   apiURL = "https://staging-api.bloobloom.com/user/v1/sales_channels/website/collections/",
   dataURL = "";
-
-  // https://api.bloobloom.com/user/v1/sales_channels/website/collections/spectacles-men/glasses?sort[type]=collection_relations_position&sort[order]=asc&filters[lens_variant_prescriptions][]=fashion&filters[lens_variant_types][]=classic&page[limit]=12&page[number]=1&filters[glass_variant_frame_variant_colour_tag_configuration_names][]=coloured&filters[glass_variant_frame_variant_frame_tag_configuration_names][]=round&filters[frame_variant_home_trial_available]=false
 
 export default {
   name: "Content",
@@ -147,9 +143,10 @@ export default {
         shapeParams = new URLSearchParams(window.location.search).get('shape'),
         convertedParams = "?sort[type]=collection_relations_position&sort[order]=asc&filters[lens_variant_prescriptions][]=fashion&filters[lens_variant_types][]=classic&filters[frame_variant_home_trial_available]=false&page[limit]=12";
 
+      // Get the page number for infinite scrolling
       convertedParams += `&page[number]=${sessionStorage.getItem("pageNumber")}`;
 
-      // Если есть фильтры по цвету, то конвертируем и добавляем
+      // If there are filters by color, then convert them and add them to the url
       if (colourParams) {
         let param = colourParams.split("~");
         sessionStorage.setItem("colour", colourParams);
@@ -160,6 +157,7 @@ export default {
         }
       }
 
+      // If there are filters by shape, then we convert them and add them to the url
       if (shapeParams) {
         let param = shapeParams.split("~");
         sessionStorage.setItem("shape", shapeParams);
@@ -170,13 +168,11 @@ export default {
         }
       }
 
-      /* console.log(convertedParams); */
-
-      // Show loader
+      // Show loader if this is the first request
       this.noResults = true;
       if (!this.loadMoreStatus) this.hideLoader = false;
 
-      // Выбираем коллекцию на основе url адреса страницы
+      // Select collection based on page url and add url to global variable
       for (let i = 0; i < data.length; i++) {
         if (currentCollection === data[i].configuration_name) {
           this.mainTitle = data[i].name;
@@ -197,36 +193,37 @@ export default {
 
     showItem: function(json) {
       let collectionBox = document.getElementById("collectionBox");
+
+      // If the filters are changed, then delete old Items
       if (!this.loadMoreStatus) collectionBox.innerHTML = "";
 
-      /* console.log(dataURL); */
       console.log(json);
 
-      // Show no results text
+      // If there are no results, then show the text "No results",
+      // else plus 1 to the page number for the next load
       if (json.length == 0) {
         if (!this.loadMoreStatus) this.noResults = false;
       } else {
-        this.noResults = true;
-
         if (this.loadMoreStatus) {
           sessionStorage.setItem("pageNumber", Number(sessionStorage.getItem("pageNumber")) + 1);
         }
       }
 
-      // Если элементов 12 и это первая загрузка, то разблокировываем бесконечную прокрутку
+      // If there are 12 items and this is the first load, then unlock infinityScroll
       if (!this.loadMoreStatus && json.length == 12) {
         this.infinityScrollDisabled = false;
       }
 
-      // Если результат меньше 12 и загрузитьБольше активно, то блокируем загрузку больше
+      // If the result is less than 12 and loadMore is active, then disable infinityScroll
       if (12 > json.length && this.loadMoreStatus) {
         this.infinityScrollDisabled = true;
       }
 
-      // Hide loader
+      // Hide the loader and change the loading status
       this.hideLoader = true;
       this.loadMoreStatus = false;
 
+      // Loop through each Item and add it to the DOM
       for (let i = 0; i < json.length; i++) {
         let itemName = json[i].name,
           itemImage = json[i].glass_variants[0].media[0].url,
@@ -250,8 +247,8 @@ export default {
         colourValue = sessionStorage.getItem("colour");
       }
 
-      // Если этот цвет уже есть в фильтре, то удаляем его после второго клика
-      // иначе добавляем цвет в фильтр и в url
+      // If this color is already in the filter, then delete it after the double click,
+      // else add the color to the filter and to the url
       if (checkColourSession && checkColourSession.includes(colour)) {
         let removedFilter = colourValue.replaceAll(`~${colour}`, '');
         newParams = { ...queryArr, 'colour': `${removedFilter}` };
@@ -262,8 +259,10 @@ export default {
         sessionStorage.setItem("colour", `${colourValue}~${colour}`);
       }
 
-      this.$router.push({ query: newParams }).catch(err => {});
+      // Reset the page number when changing the filter
       sessionStorage.setItem("pageNumber", 1);
+
+      this.$router.push({ query: newParams }).catch(err => {});
       this.getCollection();
     },
 
@@ -276,8 +275,8 @@ export default {
         shapeValue = sessionStorage.getItem("shape");
       }
 
-      // Если этот цвет уже есть в фильтре, то удаляем его после второго клика
-      // иначе добавляем цвет в фильтр и в url
+      // If this shape is already in the filter, then delete it after the double click,
+      // else add the shape to the filter and to the url
       if (checkShapeSession && checkShapeSession.includes(shape)) {
         let removedFilter = shapeValue.replaceAll(`~${shape}`, '');
         newParams = { ...queryArr, 'shape': `${removedFilter}` };
@@ -288,13 +287,18 @@ export default {
         sessionStorage.setItem("shape", `${shapeValue}~${shape}`);
       }
 
-      this.$router.push({ query: newParams }).catch(err => {});
+      // Reset the page number when changing the filter
       sessionStorage.setItem("pageNumber", 1);
+
+      this.$router.push({ query: newParams }).catch(err => {});
       this.getCollection();
     },
 
     loadMore: function() {
+      // Change the loading status to true to display the new 12 items without deleting the old ones
       this.loadMoreStatus = true;
+
+      // Requesting a new collection
       this.getCollection();
     }
 

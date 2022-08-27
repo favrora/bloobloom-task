@@ -70,7 +70,7 @@
   justify-content: flex-end;
 }
 
-/* Hide for mobile */
+/* Menu style for mobile */
 @media screen and (min-width: 1366px) {
   #headerMenu {
     height: 50px;

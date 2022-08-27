@@ -17,6 +17,7 @@
       <div class="bloobloom-header-button"></div>
     </div>
 
+    <!-- Side menu -->
     <Menu />
   </div>
 </template>
@@ -50,7 +51,6 @@ export default {
           document.querySelector(".bloobloom-header-button").classList.remove("active");
         }
       }, 0);
-
     },
   },
 };
