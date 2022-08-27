@@ -11,9 +11,11 @@ The test task is 100% completed and here I will tell you how I solved the task a
 * Plugins: `vue-router` `bootstrap` `prettier`  `vue-infinite-scroll`
 * Completed functionality: responsive design, menu opening animation, color and shape filters, infinity scrolling, loading animation (loader), no results block
 
-I also commented my code very well so you can understand my solution better. The project interacts with the bloobloom staging API and receives all the data from there.
+I also commented my code very well so you can understand my solution better. The project interacts with the bloobloom staging API and receives all the data from there. I made the site design and animation very similar to your bloobloom.com site.
 
 The design is responsive for all devices, I also adapted the menu for mobile devices and added back buttons so that users can easily close submenu.
+
+For infinite scrolling, I used the `vue-infinite-scroll` plugin, which calls the function to send a request to the API when the scroll reaches the end of the block.
 
 ## Preview
 
