@@ -90,7 +90,14 @@
     <div id="collectionBox" class="collection-items"></div>
 
     <!-- Loader -->
-    <div class="loader" :class="{ 'd-none': hideLoader }"></div>
+    <div class="loader-box" :class="{ 'd-none': hideLoader }">
+      <div class="loader"></div>
+    </div>
+
+    <!-- No results-->
+    <div class="no-results pt-4 text-center" :class="{ 'd-none': noResults }">
+      No results, please change your filters
+    </div>
 
   </div>
 </template>
@@ -109,7 +116,8 @@ export default {
       mainTitle: "Spectacles Women",
       isColourFilters: false,
       isShapeFilters: false,
-      hideLoader: true
+      hideLoader: true,
+      noResults: true
     };
   },
   created: function() {
@@ -156,9 +164,10 @@ export default {
         }
       }
 
-      console.log(convertedParams);
+      /* console.log(convertedParams); */
 
       // Show loader
+      this.noResults = true;
       this.hideLoader = false;
 
       // Выбираем коллекцию на основе url адреса страницы
@@ -184,10 +193,17 @@ export default {
       let collectionBox = document.getElementById("collectionBox");
       collectionBox.innerHTML = "";
 
-      /* console.log(json); */
+      console.log(json);
 
       // Hide loader
       this.hideLoader = true;
+
+      // Show no results text
+      if (json.length == 0) {
+        this.noResults = false;
+      } else {
+        this.noResults = true;
+      }
 
       for (let i = 0; i < json.length; i++) {
         let itemName = json[i].name,
