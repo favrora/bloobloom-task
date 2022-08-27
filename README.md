@@ -17,6 +17,8 @@ The design is responsive for all devices, I also adapted the menu for mobile dev
 
 For infinite scrolling, I used the `vue-infinite-scroll` plugin, which calls the function to send a request to the API when the scroll reaches the end of the block.
 
+And my name is David. The test task was very easy for me, I think the work in your team will also be easy, but I might think about it if I get a good offer.
+
 ## Preview
 
 https://user-images.githubusercontent.com/56507678/187029940-28e9d22b-d956-40b8-86c0-5207719d59a6.mp4
