@@ -127,7 +127,8 @@ h1 {
 	border: 1px solid transparent;
 }
 
-.filter-items .col:hover .colour-hover {
+.filter-items .col:hover .colour-hover,
+.filter-items .col.active .colour-hover {
 	border-color: #000;
 }
 
@@ -154,7 +155,8 @@ h1 {
   padding-right: 2.5rem;
 }
 
-.filter-items.shape .col:hover {
+.filter-items.shape .col:hover,
+.filter-items.shape .col.active {
 	text-decoration: underline;
 }
 
