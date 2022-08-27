@@ -197,7 +197,7 @@ export default {
       // If the filters are changed, then delete old Items
       if (!this.loadMoreStatus) collectionBox.innerHTML = "";
 
-      console.log(json);
+      /* console.log(json); */
 
       // If there are no results, then show the text "No results",
       // else plus 1 to the page number for the next load
@@ -209,19 +209,8 @@ export default {
         }
       }
 
-      // If there are 12 items and this is the first load, then unlock infinityScroll
-      if (!this.loadMoreStatus && json.length == 12) {
-        this.infinityScrollDisabled = false;
-      }
-
-      // If the result is less than 12 and loadMore is active, then disable infinityScroll
-      if (12 > json.length && this.loadMoreStatus) {
-        this.infinityScrollDisabled = true;
-      }
-
-      // Hide the loader and change the loading status
+      // Hide the loader
       this.hideLoader = true;
-      this.loadMoreStatus = false;
 
       // Loop through each Item and add it to the DOM
       for (let i = 0; i < json.length; i++) {
@@ -236,6 +225,18 @@ export default {
 
         collectionBox.innerHTML += itemTemplate;
       }
+
+      // If there are 12 items and this is the first load, then unlock infinityScroll
+      if (!this.loadMoreStatus && json.length == 12) {
+        this.infinityScrollDisabled = false;
+      }
+
+      // If the result is less than 12 and loadMore is active, then disable infinityScroll
+      if (12 > json.length && this.loadMoreStatus) {
+        this.infinityScrollDisabled = true;
+      }
+
+      this.loadMoreStatus = false;
     },
 
     addColourFilter: function(colour) {
@@ -295,11 +296,13 @@ export default {
     },
 
     loadMore: function() {
-      // Change the loading status to true to display the new 12 items without deleting the old ones
-      this.loadMoreStatus = true;
+      if (!this.loadMoreStatus) {
+        // Change the loading status to true to display the new 12 items without deleting the old ones
+        this.loadMoreStatus = true;
 
-      // Requesting a new collection
-      this.getCollection();
+        // Requesting a new collection
+        this.getCollection();
+      }
     }
 
   }

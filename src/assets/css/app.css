@@ -70,12 +70,6 @@ h1 {
 	height: 100%;
 }
 
-.filters-menu div {
-	cursor: pointer;
-	background: transparent;
-	transition: 300ms;
-}
-
 .filters-menu div:hover,
 .filters-menu div.active {
 	background: #e1e1e1;
@@ -86,6 +80,10 @@ h1 {
 	align-items: center;
 	padding: 0 2rem;
 	border-right: 1px solid #000;
+	text-transform: uppercase;
+	cursor: pointer;
+	background: transparent;
+	transition: 300ms;
 }
 
 @media screen and (max-width: 576px) {
@@ -115,7 +113,7 @@ h1 {
 .filter-items .col {
 	display: flex;
 	align-items: center;
-	padding: 1rem 0;
+	padding: 1rem 0.2rem;
 	cursor: pointer;
 }
 
@@ -184,6 +182,7 @@ h1 {
 .collection-items div.item img {
 	transition: 300ms;
 	transform: scale(1);
+	min-height: 180px;
 }
 
 .collection-items div.item:hover img {
