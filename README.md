@@ -14,7 +14,7 @@ Test
 
 <img src="src/assets/img/preview.gif" width="600px">
 
-[![Preview Video](https://favrora.com/preview.jpg)(https://favrora.com/bloobloom-task.mp4)
+[![Preview Video](https://favrora.com/preview.jpg)](https://favrora.com/bloobloom-task.mp4)
 
 ## Development
 
