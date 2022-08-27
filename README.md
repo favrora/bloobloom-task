@@ -7,12 +7,11 @@
 
 Test
 
-*Give a star to the repository, it will help us grow! Thanks!*
-
 
 ## Preview
 
-[<img src="https://favrora.com/preview.jpg" width="50%">](https://youtu.be/5ZxhQRPW_LQ "Preview Video")
+https://user-images.githubusercontent.com/56507678/187029940-28e9d22b-d956-40b8-86c0-5207719d59a6.mp4
+
 
 ## Development
 
