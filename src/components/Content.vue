@@ -87,7 +87,11 @@
     </div>
 
     <!-- Items -->
-    <div id="collectionBox" class="collection-items"></div>
+    <div id="collectionBox" class="collection-items"
+      v-infinite-scroll="loadMore"
+      infinite-scroll-disabled="infinityScrollDisabled"
+      infinite-scroll-distance="80">
+    </div>
 
     <!-- Loader -->
     <div class="loader-box" :class="{ 'd-none': hideLoader }">
@@ -117,11 +121,14 @@ export default {
       isColourFilters: false,
       isShapeFilters: false,
       hideLoader: true,
-      noResults: true
+      noResults: true,
+      loadMoreStatus: false,
+      infinityScrollDisabled: true
     };
   },
   created: function() {
     sessionStorage.clear();
+    sessionStorage.setItem("pageNumber", 1);
     this.getCollection();
   },
   methods: {
@@ -140,8 +147,7 @@ export default {
         shapeParams = new URLSearchParams(window.location.search).get('shape'),
         convertedParams = "?sort[type]=collection_relations_position&sort[order]=asc&filters[lens_variant_prescriptions][]=fashion&filters[lens_variant_types][]=classic&filters[frame_variant_home_trial_available]=false&page[limit]=12";
 
-
-      convertedParams += "&page[number]=1";
+      convertedParams += `&page[number]=${sessionStorage.getItem("pageNumber")}`;
 
       // Если есть фильтры по цвету, то конвертируем и добавляем
       if (colourParams) {
@@ -168,7 +174,7 @@ export default {
 
       // Show loader
       this.noResults = true;
-      this.hideLoader = false;
+      if (!this.loadMoreStatus) this.hideLoader = false;
 
       // Выбираем коллекцию на основе url адреса страницы
       for (let i = 0; i < data.length; i++) {
@@ -191,19 +197,35 @@ export default {
 
     showItem: function(json) {
       let collectionBox = document.getElementById("collectionBox");
-      collectionBox.innerHTML = "";
+      if (!this.loadMoreStatus) collectionBox.innerHTML = "";
 
+      /* console.log(dataURL); */
       console.log(json);
-
-      // Hide loader
-      this.hideLoader = true;
 
       // Show no results text
       if (json.length == 0) {
-        this.noResults = false;
+        if (!this.loadMoreStatus) this.noResults = false;
       } else {
         this.noResults = true;
+
+        if (this.loadMoreStatus) {
+          sessionStorage.setItem("pageNumber", Number(sessionStorage.getItem("pageNumber")) + 1);
+        }
       }
+
+      // Если элементов 12 и это первая загрузка, то разблокировываем бесконечную прокрутку
+      if (!this.loadMoreStatus && json.length == 12) {
+        this.infinityScrollDisabled = false;
+      }
+
+      // Если результат меньше 12 и загрузитьБольше активно, то блокируем загрузку больше
+      if (12 > json.length && this.loadMoreStatus) {
+        this.infinityScrollDisabled = true;
+      }
+
+      // Hide loader
+      this.hideLoader = true;
+      this.loadMoreStatus = false;
 
       for (let i = 0; i < json.length; i++) {
         let itemName = json[i].name,
@@ -241,6 +263,7 @@ export default {
       }
 
       this.$router.push({ query: newParams }).catch(err => {});
+      sessionStorage.setItem("pageNumber", 1);
       this.getCollection();
     },
 
@@ -266,6 +289,12 @@ export default {
       }
 
       this.$router.push({ query: newParams }).catch(err => {});
+      sessionStorage.setItem("pageNumber", 1);
+      this.getCollection();
+    },
+
+    loadMore: function() {
+      this.loadMoreStatus = true;
       this.getCollection();
     }
 
