@@ -5,8 +5,15 @@
 
 # Bloobloom Test Task
 
-Test
+The test task is 100% completed and here I will tell you how I solved the task and what I used.
 
+* Stack: `Vue.js` `HTML5` `CSS 3.0`
+* Plugins: `vue-router` `bootstrap` `prettier`  `vue-infinite-scroll`
+* Completed functionality: responsive design, menu opening animation, color and shape filters, infinity scrolling, loading animation (loader), no results block
+
+I also commented my code very well so you can understand my solution better. The project interacts with the bloobloom staging API and receives all the data from there.
+
+The design is responsive for all devices, I also adapted the menu for mobile devices and added back buttons so that users can easily close submenu.
 
 ## Preview
 
